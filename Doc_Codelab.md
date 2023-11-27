@@ -60,7 +60,7 @@ Per eseguire i comandi Flutter attraverso la console di Windows sarà necessario
 
 >  C:\SDKs\flutter\bin
 
-![enter image description here](https://raw.githubusercontent.com/RayCatcherS/CodelabFlutterUni/main/media/steps/flutter_path.png?token=GHSAT0AAAAAACKLIQZLAAHFZFTJ25SEQ3PAZLED7XQ)
+![enter image description here](C:\Users\roman\Documents\GitHub\CodelabFlutterUni\media\steps\flutter_path.png)
 Per verificare che tutto funzioni, chiudere tutte i terminali Windows eventualmente aperti, aprire un Terminale ed eseguire il comando:
 
 > flutter doctor
@@ -72,7 +72,7 @@ Se si dovesse verificare un errore con codice **"Error: Unable to find git in yo
 In questo Codelab scriveremo una piccola app per Windows e Flutter per compilare la base di codice avrà bisogno del kit di sviluppo Windows.
 Scaricare il setup del kit di sviluppo windows Visual Studio 2022, [Scaricabile da qui.](https://visualstudio.microsoft.com/it/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030&passive=false) **Attenzione non stiamo parlando dell'editor Visual Studio Code!**. 
 Una volta scaricato il **setup di Visual Studio 2022** bisogna verificare nelle impostazioni di installazione che “Desktop development with C++” sia selezionato, incluse tutte le componenti di default. 
-![desc](https://raw.githubusercontent.com/RayCatcherS/CodelabFlutterUni/main/media/steps/visual_studio_desktop_Develpment_with_C%2B%2B.png?token=GHSAT0AAAAAACKLIQZKPOQDLVMWRRYM4S6KZLDXUVQ)
+![desc](C:\Users\roman\Documents\GitHub\CodelabFlutterUni\media\steps\visual_studio_desktop_Develpment_with_C++.png)
 
 ### 5) Installazione di Visual Studio Code
 
@@ -82,7 +82,7 @@ Useremo Visual Studio Code perchè è semplice, affidabile e lo usano molte pers
 ### 6) Installazione Plugin Flutter
 
 Apri l'editor di Visual Studio Code e Installa il plugin flutter 
-![desc](https://raw.githubusercontent.com/RayCatcherS/CodelabFlutterUni/main/media/steps/flutter_plugin.png?token=GHSAT0AAAAAACKLIQZLP7FCHWT7D4GONDYOZLDYMYA)
+![desc](C:\Users\roman\Documents\GitHub\CodelabFlutterUni\media\steps\flutter_plugin.png)
 
 # Codelab di oggi
 
@@ -114,7 +114,7 @@ Un altro suggerimento è che se state sviluppando un'app per computer Windows al
 ## Creiamo un nuovo progetto
 
 Avvia Visual Studio Code, aprire la command palette (con F1 o Ctrl+Shift+P o Shift+Cmd+P). Digitare "**flutter new**" e selezionare il comando "**Flutter: New Project**"
-![desc](https://raw.githubusercontent.com/RayCatcherS/CodelabFlutterUni/main/media/steps/command_pallet.png?token=GHSAT0AAAAAACKLIQZKLGHJOU7AVFNUR5MGZLDYY7Q)
+![desc](C:\Users\roman\Documents\GitHub\CodelabFlutterUni\media\steps\command_pallet.png)
 Dopo selezionare "**Application**", seleziona ora una cartella in cui creare un nuovo progetto. Per comodità nella cartella Documenti Creiamo una cartella chiamata Flutter e la selezioniamo.
 Infine dai un nome alla tua app come `flutter_app`o `flutter_application_1`.
 
@@ -127,14 +127,14 @@ A questo punto flutter procederà con la creazione del progetto. Ci potrebbero v
 ## Selezioniamo il Target Device
 
 Per selezionare il **target device**, (1) premere nell'angolo in basso a destra di VS Code. (2) Selezionare quindi **Windows - desktop** che dovrebbe comparire tra i device disponibili.
-![desc](https://raw.githubusercontent.com/RayCatcherS/CodelabFlutterUni/main/media/steps/set_target_device.png?token=GHSAT0AAAAAACKLIQZKFMJWOAZQEEMAMNMYZLD3ALA)
+![desc](C:\Users\roman\Documents\GitHub\CodelabFlutterUni\media\steps\set_target_device.png)
 
 ## Avviamo l'app(Debug)
 
 Per avviare l'app in modalità Debug assicurarsi che sia aperto il file `lib/main.dart` e premere il pulsante in alto a destra della finestra di VS Code o premere F5
-![desc](https://raw.githubusercontent.com/RayCatcherS/CodelabFlutterUni/main/media/steps/run_app.png?token=GHSAT0AAAAAACKLIQZKJG5LFC25NI7LK34AZLD3NQQ)
+![desc](C:\Users\roman\Documents\GitHub\CodelabFlutterUni\media\steps\run_app.png)
 Dopo circa un minuto l'app verrà avviata l'app in modalità debug. Potremo visualizzare quindi la demo Flutter preimpostata mentre viene eseguita nella finestra.
-![desc](https://raw.githubusercontent.com/RayCatcherS/CodelabFlutterUni/main/media/steps/flutter_app.png?token=GHSAT0AAAAAACKLIQZLA35ADRFZV3STKB5GZLD3Q5A)
+![desc](C:\Users\roman\Documents\GitHub\CodelabFlutterUni\media\steps\flutter_app.png)
 
 # Idea dell'app e codice partenza
 
