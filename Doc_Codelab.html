@@ -1868,9 +1868,8 @@ Ad esempio agli altri widget non interessa sapere l'index  della pagina visualiz
 </li>
 <li><p>Nel nostro caso lo <code>StatefulWidget</code> <code>Navigation</code> che abbiamo creato, contiene lo stato della sua navigation bar(l'index), e ogni volta che l'index della <strong><code>Navigationbar()</code></strong> cambierà, allora ricostruirà la sua visualizzazione.</p>
 </li>
-</ul>
-<ul>
-<li>Nel caso del nostro <code>Navigation</code> widget, il suo stato <code>currentPageIndex</code>, quando verrà cambiato con l'evento <code>onDestinationSelected</code> andrà a chiamare la ricostruzione del widget <code>Navigation</code> in questo modo:</li>
+<li><p>Nel caso del nostro <code>Navigation</code> widget, il suo stato <code>currentPageIndex</code>, quando verrà cambiato con l'evento <code>onDestinationSelected</code> andrà a chiamare la ricostruzione del widget <code>Navigation</code> in questo modo:</p>
+</li>
 </ul>
 <pre><code class="fenced-code-block language-dart"><span class="token comment">//...</span>
 
@@ -1890,7 +1889,8 @@ onDestinationSelected<span class="token punctuation">:</span> <span class="token
 <p>Ho inserito il tasto Remove in ogni elemento della lista preferiti <code>FavoriteTile</code> chiedendo di rimuovere dallo stato dell'app la parola da rimuovere, vedere <code>appState.removeFavorite(pair);</code>. Possiamo aggiungere e rimuovere parole. I widget in ascolto sullo stato <code>MyAppState</code> si ricostruirando con coerenza per tutta l'app in modo coerente e consistente. </p>
 <p>Esempio in javascript-html, svantaggio del dover elencare tutti i componenti html che devono visualizzare un determinato dato.  </p>
 <h2 class="atx" id="fine-codelab">Fine codelab</h2>
-<p>Questo sarà il progetto di partenza per il prossimo codelab in cui implementeremo l'autenticazione tramite servizi cloud Firebase. Utilizzeremo il database del servizio Firebase per memorizzare delle strutture dati sul database e useremo dei metodi per ottenere i dati dal database.</p>
+<p>Questo sarà il progetto di partenza per il prossimo codelab in cui implementeremo l'autenticazione tramite servizi cloud Firebase. Utilizzeremo il database del servizio Firebase per memorizzare delle strutture dati sul database e useremo dei metodi per ottenere i dati dal database.
+Il codice di partenza e il secondo codelab a questo <a href="https://github.com/RayCatcherS/Codelab2FlutterCasoStudioIUMUni">link</a> </p>
 </article>
 </body>
 </html>
