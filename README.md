@@ -797,3 +797,4 @@ Esempio in javascript-html, svantaggio del dover elencare tutti i componenti htm
 ## Fine codelab
 
 Questo sarà il progetto di partenza per il prossimo codelab in cui implementeremo l'autenticazione tramite servizi cloud Firebase. Utilizzeremo il database del servizio Firebase per memorizzare delle strutture dati sul database e useremo dei metodi per ottenere i dati dal database.
+[Link secondo codelab](https://github.com/RayCatcherS/Codelab2FlutterCasoStudioIUMUni) 
