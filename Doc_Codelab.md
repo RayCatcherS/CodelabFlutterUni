@@ -2,6 +2,10 @@
 
 ![enter image description here](https://raw.githubusercontent.com/RayCatcherS/CodelabFlutterUni/main/media/qrcode.png?token=GHSAT0AAAAAACKLIQZKJ6O745FJ4SOBEHBCZLDZFSQ)
 
+# 
+
+# (Lezione 1)
+
 # Flutter
 
 Flutter è un framework open-source di Google per creare User Interface native su un'unica unica code base, unico codice e possiamo compilare applicazioni su più piattaforme(Android, iOS, Windows, macOS, Linux, Web).
@@ -467,3 +471,280 @@ In Flutter, il parametro `onPressed` nei widget dei bottoni è utilizzato per sp
 
 // ...
 ```
+
+# (Lezione 2)
+
+# Rapido riassunto
+
+rapido riassunto sui widget e sulla gestione dello stato dell'app
+
+# Breve excursus
+
+Breve excursus su aspetti che avremmo dovuto completare nello scorso codelab
+
+#### Stateless widget
+
+Ci sono due tipi di widget(stateless widget e stateful widget) e per ora stiamo usando uno stateless widget. Sono entrambi widget, non cambia nulla. Ne vedremo la differenza dei due più avanti
+
+#### Accedere ai dati degli stati in un widget generico
+
+Non portare dietro per il widget l'intero stato ma estrarre le variabili nel metodo build prima di usarle nel widget.
+
+```dart
+// ...
+
+// widget che stiamo implementando
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+
+    // Avere widget separati per parti logiche separate della tua interfaccia
+    // utente è un modo importante per gestire la complessità in Flutter.
+    MyAppState appState = context.watch<MyAppState>();
+    // dichiaro qui sopra l'oggetto che mi serve senza portare dietro per tutto 
+    // il widget l'intero appState
+    WordPair pair = appState.current; 
+
+// resto del codice ...
+```
+
+#### Refactoring
+
+##### Wrap
+
+Per innestare agilmente i widget con il fine di creare il layout che desideriamo, usiamo gli strumenti forniti dall'editor VS Code, il Refactoring(Wrap)
+
+[qui video](https://www.youtube.com/watch?v=zPklkjwUsFc&t)
+
+##### Extract Widget
+
+costruire layout
+
+```dart
+// ...
+Column(
+    children: [
+        Container(
+            color: Colors.red,
+            child: Row(Text("titolo"))
+        )
+        Container(
+            child: Row(
+                children: [
+                    Container(
+                        color: Colors.blue
+                        Text("titolo")
+                    ),
+                    Container(
+                        color: Colors.yellow
+                        Text("titolo")
+                    )
+                ]
+            )
+        )
+
+    ]
+) 
+// ... 
+```
+
+come già visto i layout crescono velocemente in lunghezza o per vari motivi può essere utile "esportare" un albero di widget estraendolo come un widget
+
+[Qui video](https://www.youtube.com/watch?v=9BhqIPMOEIM)
+
+#### Widget Primitivi layout
+
+##### Padding
+
+aggiungere widget padding, cosa fa.
+
+##### Layout, stili e tema
+
+Sappiamo bene anche rispetto al corso che state seguendo che la consistenza di stili e colori all'interno dell'app è importante
+
+- **Personalizzare stile usando il tema**: Ad esempio nell'utilizzo nel widget BigCard, usiamo come colore il valore usato dal tema corrente nell'app.
+
+- **Modifiche tema**: Puoi modificare questo colore e altro del tema dell'intera app scorrendo verso l'alto `MyApp`e modificando il colore per `ColorScheme`.
+
+```dart
+MaterialApp(
+    title: 'Namer App',
+    theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+    ),
+    home: MyHomePage(),
+),
+```
+
+- **Personalizzare stile testo**: Anche rispetto al corso che state facendo, sappiamo che il testo deve essere sempre leggibile e che deve avere determinate caratteristiche in base al contesto. 
+  Estraiamo anche qui le informazioni dal tema e le usiamo per personalizzare il testo(potreste creare un oggetto textStyle ad hoc ma in questo caso seguiamo le best practices)
+  
+  ```dart
+  // ... 
+      @override
+      Widget build(BuildContext context) {
+       final theme = Theme.of(context); 
+      final TextStyle textStyle = theme.textTheme.displayMedium!.copyWith(
+          color: theme.colorScheme.onPrimary,
+      ); 
+  // ...
+  // ... 
+  child: Text(pair.asLowerCase, style: textStyle), 
+  // ...
+  ```
+  
+  - Utilizzando `theme.textTheme,`accedi al tema dei caratteri dell'app. Questa classe include membri come `bodyMedium`(per testo standard di medie dimensioni), `caption`(per didascalie di immagini) o `headlineLarge`(per titoli di grandi dimensioni).
+  
+  - La proprietà del tema `displayMedium`potrebbe teoricamente essere `null`. Dart, il linguaggio di programmazione in cui stai scrivendo questa app, è null-safe, quindi non ti consentirà di chiamare metodi di oggetti potenzialmente `null`. In questo caso, però, puoi utilizzare l' `!`operatore ("operatore bang") per assicurarti che Dart sappia cosa stai facendo. (`displayMedium` non è nullo in questo caso)
+  
+  - La chiamata `copyWith()`a `displayMedium`restituisce una *copia* dello stile di testo *con* le modifiche definite. In questo caso, stai solo cambiando il colore del testo.
+  
+  - `onPrimary` è il colore usato dal tema per rendere un elemento leggibile se il widget si trova su un colore ad esempio Per ottenere il nuovo colore, accedi al widget tema dell'app nel main(widget root `ThemeData`). Modifica la proprietà `onPrimary`.
+  
+  - Per ottenere l'elenco completo delle proprietà che puoi modificare, posiziona il cursore in un punto qualsiasi all'interno `copyWith()`delle parentesi e premi `Ctrl+Shift+Space`(Win/Linux)  o `Cmd+Shift+Space`(Mac), per ottenere suggerimenti sull'auto-completamento e su altri parametri modificabili
+
+- **Centrare l'interfaccia**: Nel widget `MyHomePage` per centrare gli elementi figli di un `Column` usare all'interno di Column `mainAxisAlignment: MainAxisAlignment.center` in questo modo:
+  
+  ```dart
+  // ...
+  
+  Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+  
+  // ...
+  ```
+  
+  Per centrare invece l'intero Widget `Column` rispetto alla pagina usare
+
+- **Widget Inspector** possiamo utilizzare questo potente strumento per visualizzare il layout creato nella nostra applicazione e modificarne gli effetti visualizzandone il risultato in tempo reale sulla schermata di debug. 
+  Per attivare il Widget Inspector, avviare l'emulazione o l'esecuzione dell'app(F5 o da icona per avviare il debug). Clicca poi sull'iconcina della lente di ingradimento.
+  
+  [Video qui](https://www.youtube.com/watch?v=v0KWdBaoark)
+  
+  - Per visualizzare come i widget si adattano al layout cliccare sulla voce "Toggle select widget mode". Ora potremo selezionare i Widget nella **debug session** o nel **widget inspector** per visualizzare come questi si adattano al layout.
+    
+    - notare come nella visualizzazione del widget inspector abbiamo le informazioni sulle dimensioni del widget:
+      
+      - w = lunghezza widget, questo è compreso tra 0 <= w <= e una certa lunghezza del widget padre
+  
+  - Sempre nel widget `MyHomepage`, Wrappiamo ora il widget `Column` con `Center` cliccando con il tasto destro sul widget `Center`,
+    clicca su "Refactor" --> "Wrap with Center" per centro
+
+## Aggiungere funzionalità(Business logic)
+
+Vogliamo salvare la parola generata usando un pulsante(button) "Mi piace".
+Quindi torniamo nella classe che rappresenta lo stato dell'app `MyAppState` e aggiungiamo questo codice
+
+```dart
+// ...
+
+class MyAppState extends ChangeNotifier {
+  var current = WordPair.random();
+
+  void getNext() {
+    current = WordPair.random();
+    notifyListeners();
+  }
+
+  // ↓ Add the code below.
+  List<WordPair> favorites = <WordPair>[];
+
+  void toggleFavorite() {
+    if (favorites.contains(current)) {
+      favorites.remove(current);
+    } else {
+      favorites.add(current);
+    }
+    notifyListeners();
+  }
+}
+
+// ...
+```
+
+Quindi aggiungiamo la sita di parole che conterrà quelle preferite(su cui premiamo like). Abbiamo anche inserito il metodo `toggleFavorite` che aggiunge una parola in lista se non è presente, altrimenti la elimina.
+
+## Colleghiamo l'interfaccia alla nuova funzionalità
+
+Torniamo in `MyHomePage` e aggiungiamo un bottone per attivare la nuova funzionalità. Aggiungiamo il bottone sulla stessa riga usando `Row` in questo modo:
+
+- Usiamo il Refactor per innestare il widget Row.
+
+- Settiamo l'ampiezza della Row in base alla grandezza dei figli con `mainAxisSize: MainAxisSize.min`
+
+- Inseriamo un nuovo `ElevatedButton.icon` questo bottone predefinito di flutter richiede che tra i parametri sia passata un'icona(`IconData`) che come già sappiamo è anch'essa un widget
+
+- Creiamo un po' di spazio tra i due bottoni con il Widget `SizedBox(width: 10)` inserendolo tra i due bottoni (figli di Row)
+
+- nel parametro `onPressed:` del nuovo bottone inseriamo il metodo `appState.toggleFavorite();` che abbiamo creato precedentemente nello state dell'app.
+
+- Creiamo una variabile `IconData icon` e assegnamo un'icona differente in base al fatto che la parola generata sia all'interno o meno della lista, controllando appunto con una condizione se `if(appState.favorites.contains(pair))`. 
+  Se la parola è contenuta istanziamo un Widget Icona con simbolo di un cuore pieno, altrimenti istanziamo un Widget Icona con simbolo di un cuore vuoto.
+
+```dart
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+
+    // Avere widget separati per parti logiche separate della tua interfaccia
+    // utente è un modo importante per gestire la complessità in Flutter.
+    MyAppState appState = context.watch<MyAppState>();
+    // dichiaro qui sopra l'oggetto che mi serve senza portare dietro per tutto 
+    // il widget l'intero appState
+    WordPair pair = appState.current; 
+
+
+    IconData icon;
+    if (appState.favorites.contains(pair)) {
+      icon = Icons.favorite;
+    } else {
+      icon = Icons.favorite_border;
+    }
+
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BigCard(pair: pair),
+            SizedBox(height: 10),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: () {
+                    appState.toggleFavorite();
+                  },
+                  icon: Icon(icon),
+                  label: Text('Like'),
+                ),
+                SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    appState.getNext();
+                  },
+                  child: Text('Next'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+Quindi a questo punto possiamo aggiungere le nostre parole preferite all'interno di una lista.
+
+
+
+
+
+
+
+
+
+parlare del code organization del progetto flutter [code organization source](https://medium.com/@patthipati/code-organization-with-provider-state-management-for-flutter-ae2a77b63718)

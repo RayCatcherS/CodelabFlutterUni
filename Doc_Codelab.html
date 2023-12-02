@@ -1250,6 +1250,8 @@ pre[class*="language-"] {
 <body>
   <article class="markdown-body"><h1 class="atx" id="link-download-doc-codelab">Link Download Doc Codelab</h1>
 <p><img alt="enter image description here" src="https://raw.githubusercontent.com/RayCatcherS/CodelabFlutterUni/main/media/qrcode.png?token=GHSAT0AAAAAACKLIQZKJ6O745FJ4SOBEHBCZLDZFSQ"></p>
+<h1 class="atx" id=""></h1>
+<h1 class="atx" id="lezione-1">(Lezione 1)</h1>
 <h1 class="atx" id="flutter">Flutter</h1>
 <p>Flutter è un framework open-source di Google per creare User Interface native su un'unica unica code base, unico codice e possiamo compilare applicazioni su più piattaforme(Android, iOS, Windows, macOS, Linux, Web).</p>
 <h3 class="atx" id="vantaggi">Vantaggi:</h3>
@@ -1624,6 +1626,236 @@ In Flutter, il parametro <code>onPressed</code> nei widget dei bottoni è utiliz
     <span class="token punctuation">)</span><span class="token punctuation">,</span>
 
 <span class="token comment">// ...</span></code></pre>
+<h1 class="atx" id="lezione-2">(Lezione 2)</h1>
+<h1 class="atx" id="rapido-riassunto">Rapido riassunto</h1>
+<p>rapido riassunto sui widget e sulla gestione dello stato dell'app</p>
+<h1 class="atx" id="breve-excursus">Breve excursus</h1>
+<p>Breve excursus su aspetti che avremmo dovuto completare nello scorso codelab</p>
+<h4 class="atx" id="stateless-widget">Stateless widget</h4>
+<p>Ci sono due tipi di widget(stateless widget e stateful widget) e per ora stiamo usando uno stateless widget. Sono entrambi widget, non cambia nulla. Ne vedremo la differenza dei due più avanti</p>
+<h4 class="atx" id="accedere-ai-dati-degli-stati-in-un-widget-generico">Accedere ai dati degli stati in un widget generico</h4>
+<p>Non portare dietro per il widget l'intero stato ma estrarre le variabili nel metodo build prima di usarle nel widget.</p>
+<pre><code class="fenced-code-block language-dart"><span class="token comment">// ...</span>
+
+<span class="token comment">// widget che stiamo implementando</span>
+<span class="token keyword">class</span> <span class="token class-name">MyHomePage</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span> <span class="token punctuation">{</span>
+  <span class="token metadata function">@override</span>
+  <span class="token class-name">Widget</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token class-name">BuildContext</span> context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// Avere widget separati per parti logiche separate della tua interfaccia</span>
+    <span class="token comment">// utente è un modo importante per gestire la complessità in Flutter.</span>
+    <span class="token class-name">MyAppState</span> appState <span class="token operator">=</span> context<span class="token punctuation">.</span>watch<span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">MyAppState</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// dichiaro qui sopra l'oggetto che mi serve senza portare dietro per tutto </span>
+    <span class="token comment">// il widget l'intero appState</span>
+    <span class="token class-name">WordPair</span> pair <span class="token operator">=</span> appState<span class="token punctuation">.</span>current<span class="token punctuation">;</span> 
+
+<span class="token comment">// resto del codice ...</span></code></pre>
+<h4 class="atx" id="refactoring">Refactoring</h4>
+<h5 class="atx" id="wrap">Wrap</h5>
+<p>Per innestare agilmente i widget con il fine di creare il layout che desideriamo, usiamo gli strumenti forniti dall'editor VS Code, il Refactoring(Wrap)</p>
+<p><a href="https://www.youtube.com/watch?v=zPklkjwUsFc&amp;t">qui video</a></p>
+<h5 class="atx" id="extract-widget">Extract Widget</h5>
+<p>costruire layout</p>
+<pre><code class="fenced-code-block language-dart"><span class="token comment">// ...</span>
+<span class="token class-name">Column</span><span class="token punctuation">(</span>
+    children<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token class-name">Container</span><span class="token punctuation">(</span>
+            color<span class="token punctuation">:</span> <span class="token class-name">Colors</span><span class="token punctuation">.</span>red<span class="token punctuation">,</span>
+            child<span class="token punctuation">:</span> <span class="token class-name">Row</span><span class="token punctuation">(</span><span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"titolo"</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+        <span class="token class-name">Container</span><span class="token punctuation">(</span>
+            child<span class="token punctuation">:</span> <span class="token class-name">Row</span><span class="token punctuation">(</span>
+                children<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+                    <span class="token class-name">Container</span><span class="token punctuation">(</span>
+                        color<span class="token punctuation">:</span> <span class="token class-name">Colors</span><span class="token punctuation">.</span>blue
+                        <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"titolo"</span></span><span class="token punctuation">)</span>
+                    <span class="token punctuation">)</span><span class="token punctuation">,</span>
+                    <span class="token class-name">Container</span><span class="token punctuation">(</span>
+                        color<span class="token punctuation">:</span> <span class="token class-name">Colors</span><span class="token punctuation">.</span>yellow
+                        <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"titolo"</span></span><span class="token punctuation">)</span>
+                    <span class="token punctuation">)</span>
+                <span class="token punctuation">]</span>
+            <span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+
+    <span class="token punctuation">]</span>
+<span class="token punctuation">)</span> 
+<span class="token comment">// ... </span></code></pre>
+<p>come già visto i layout crescono velocemente in lunghezza o per vari motivi può essere utile "esportare" un albero di widget estraendolo come un widget</p>
+<p><a href="https://www.youtube.com/watch?v=9BhqIPMOEIM">Qui video</a></p>
+<h4 class="atx" id="widget-primitivi-layout">Widget Primitivi layout</h4>
+<h5 class="atx" id="padding">Padding</h5>
+<p>aggiungere widget padding, cosa fa.</p>
+<h5 class="atx" id="layout-stili-e-tema">Layout, stili e tema</h5>
+<p>Sappiamo bene anche rispetto al corso che state seguendo che la consistenza di stili e colori all'interno dell'app è importante</p>
+<ul>
+<li><p><strong>Personalizzare stile usando il tema</strong>: Ad esempio nell'utilizzo nel widget BigCard, usiamo come colore il valore usato dal tema corrente nell'app.</p>
+</li>
+<li><p><strong>Modifiche tema</strong>: Puoi modificare questo colore e altro del tema dell'intera app scorrendo verso l'alto&nbsp;<code>MyApp</code>e modificando il colore per&nbsp;<code>ColorScheme</code>.</p>
+</li>
+</ul>
+<pre><code class="fenced-code-block language-dart"><span class="token class-name">MaterialApp</span><span class="token punctuation">(</span>
+    title<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">'Namer App'</span></span><span class="token punctuation">,</span>
+    theme<span class="token punctuation">:</span> <span class="token class-name">ThemeData</span><span class="token punctuation">(</span>
+        useMaterial3<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        colorScheme<span class="token punctuation">:</span> <span class="token class-name">ColorScheme</span><span class="token punctuation">.</span><span class="token function">fromSeed</span><span class="token punctuation">(</span>seedColor<span class="token punctuation">:</span> <span class="token class-name">Colors</span><span class="token punctuation">.</span>deepOrange<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    home<span class="token punctuation">:</span> <span class="token class-name">MyHomePage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">,</span></code></pre>
+<ul>
+<li><p><strong>Personalizzare stile testo</strong>: Anche rispetto al corso che state facendo, sappiamo che il testo deve essere sempre leggibile e che deve avere determinate caratteristiche in base al contesto. 
+Estraiamo anche qui le informazioni dal tema e le usiamo per personalizzare il testo(potreste creare un oggetto textStyle ad hoc ma in questo caso seguiamo le best practices)</p>
+<pre><code class="fenced-code-block language-dart"><span class="token comment">// ... </span>
+    <span class="token metadata function">@override</span>
+    <span class="token class-name">Widget</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token class-name">BuildContext</span> context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">final</span> theme <span class="token operator">=</span> <span class="token class-name">Theme</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token keyword">final</span> <span class="token class-name">TextStyle</span> textStyle <span class="token operator">=</span> theme<span class="token punctuation">.</span>textTheme<span class="token punctuation">.</span>displayMedium<span class="token operator">!</span><span class="token punctuation">.</span><span class="token function">copyWith</span><span class="token punctuation">(</span>
+        color<span class="token punctuation">:</span> theme<span class="token punctuation">.</span>colorScheme<span class="token punctuation">.</span>onPrimary<span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment">// ...</span>
+<span class="token comment">// ... </span>
+child<span class="token punctuation">:</span> <span class="token class-name">Text</span><span class="token punctuation">(</span>pair<span class="token punctuation">.</span>asLowerCase<span class="token punctuation">,</span> style<span class="token punctuation">:</span> textStyle<span class="token punctuation">)</span><span class="token punctuation">,</span> 
+<span class="token comment">// ...</span></code></pre>
+<ul>
+<li><p>Utilizzando&nbsp;<code>theme.textTheme,</code>accedi al tema dei caratteri dell'app.&nbsp;Questa classe include membri come&nbsp;<code>bodyMedium</code>(per testo standard di medie dimensioni),&nbsp;<code>caption</code>(per didascalie di immagini) o&nbsp;<code>headlineLarge</code>(per titoli di grandi dimensioni).</p>
+</li>
+<li><p>La proprietà del tema&nbsp;<code>displayMedium</code>potrebbe teoricamente essere&nbsp;<code>null</code>.&nbsp;Dart, il linguaggio di programmazione in cui stai scrivendo questa app, è null-safe, quindi non ti consentirà di chiamare metodi di oggetti potenzialmente&nbsp;<code>null</code>.&nbsp;In questo caso, però, puoi utilizzare l'&nbsp;<code>!</code>operatore ("operatore bang") per assicurarti che Dart sappia cosa stai facendo.&nbsp;(<code>displayMedium</code>&nbsp;non è nullo in questo caso)</p>
+</li>
+<li><p>La chiamata&nbsp;<code>copyWith()</code>a&nbsp;<code>displayMedium</code>restituisce una&nbsp;<em>copia</em>&nbsp;dello stile di testo&nbsp;<em>con</em>&nbsp;le modifiche definite.&nbsp;In questo caso, stai solo cambiando il colore del testo.</p>
+</li>
+<li><p><code>onPrimary</code> è il colore usato dal tema per rendere un elemento leggibile se il widget si trova su un colore ad esempio Per ottenere il nuovo colore, accedi al widget tema dell'app nel main(widget root <code>ThemeData</code>).&nbsp;Modifica la proprietà&nbsp;<code>onPrimary</code>.</p>
+</li>
+<li><p>Per ottenere l'elenco completo delle proprietà che puoi modificare, posiziona il cursore in un punto qualsiasi all'interno&nbsp;<code>copyWith()</code>delle parentesi e premi&nbsp;<code>Ctrl+Shift+Space</code>(Win/Linux) &nbsp;o&nbsp;<code>Cmd+Shift+Space</code>(Mac), per ottenere suggerimenti sull'auto-completamento e su altri parametri modificabili</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Centrare l'interfaccia</strong>: Nel widget <code>MyHomePage</code> per centrare gli elementi figli di un <code>Column</code> usare all'interno di Column <code>mainAxisAlignment: MainAxisAlignment.center</code> in questo modo:</p>
+<pre><code class="fenced-code-block language-dart"><span class="token comment">// ...</span>
+
+<span class="token class-name">Column</span><span class="token punctuation">(</span>
+    mainAxisAlignment<span class="token punctuation">:</span> <span class="token class-name">MainAxisAlignment</span><span class="token punctuation">.</span>center<span class="token punctuation">,</span>
+    children<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+
+<span class="token comment">// ...</span></code></pre>
+<p>Per centrare invece l'intero Widget <code>Column</code> rispetto alla pagina usare</p>
+</li>
+<li><p><strong>Widget Inspector</strong> possiamo utilizzare questo potente strumento per visualizzare il layout creato nella nostra applicazione e modificarne gli effetti visualizzandone il risultato in tempo reale sulla schermata di debug. 
+Per attivare il Widget Inspector, avviare l'emulazione o l'esecuzione dell'app(F5 o da icona per avviare il debug). Clicca poi sull'iconcina della lente di ingradimento.</p>
+<p><a href="https://www.youtube.com/watch?v=v0KWdBaoark">Video qui</a></p>
+<ul>
+<li><p>Per visualizzare come i widget si adattano al layout cliccare sulla voce "Toggle select widget mode". Ora potremo selezionare i Widget nella <strong>debug session</strong> o nel <strong>widget inspector</strong> per visualizzare come questi si adattano al layout.</p>
+<ul>
+<li><p>notare come nella visualizzazione del widget inspector abbiamo le informazioni sulle dimensioni del widget:</p>
+<ul>
+<li>w = lunghezza widget, questo è compreso tra 0 &lt;= w &lt;= e una certa lunghezza del widget padre</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Sempre nel widget <code>MyHomepage</code>, Wrappiamo ora il widget <code>Column</code> con <code>Center</code> cliccando con il tasto destro sul widget <code>Center</code>,
+clicca su "Refactor" --&gt; "Wrap with Center" per centro</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 class="atx" id="aggiungere-funzionalitabusiness-logic">Aggiungere funzionalità(Business logic)</h2>
+<p>Vogliamo salvare la parola generata usando un pulsante(button) "Mi piace".
+Quindi torniamo nella classe che rappresenta lo stato dell'app <code>MyAppState</code> e aggiungiamo questo codice</p>
+<pre><code class="fenced-code-block language-dart"><span class="token comment">// ...</span>
+
+<span class="token keyword">class</span> <span class="token class-name">MyAppState</span> <span class="token keyword">extends</span> <span class="token class-name">ChangeNotifier</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> current <span class="token operator">=</span> <span class="token class-name">WordPair</span><span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">void</span> <span class="token function">getNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    current <span class="token operator">=</span> <span class="token class-name">WordPair</span><span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">notifyListeners</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// ↓ Add the code below.</span>
+  <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">WordPair</span><span class="token punctuation">&gt;</span></span> favorites <span class="token operator">=</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">WordPair</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">void</span> <span class="token function">toggleFavorite</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>favorites<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>current<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      favorites<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>current<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      favorites<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>current<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">notifyListeners</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// ...</span></code></pre>
+<p>Quindi aggiungiamo la sita di parole che conterrà quelle preferite(su cui premiamo like). Abbiamo anche inserito il metodo <code>toggleFavorite</code> che aggiunge una parola in lista se non è presente, altrimenti la elimina.</p>
+<h2 class="atx" id="colleghiamo-land39interfaccia-alla-nuova-funzionalita">Colleghiamo l'interfaccia alla nuova funzionalità</h2>
+<p>Torniamo in <code>MyHomePage</code> e aggiungiamo un bottone per attivare la nuova funzionalità. Aggiungiamo il bottone sulla stessa riga usando <code>Row</code> in questo modo:</p>
+<ul>
+<li><p>Usiamo il Refactor per innestare il widget Row.</p>
+</li>
+<li><p>Settiamo l'ampiezza della Row in base alla grandezza dei figli con <code>mainAxisSize: MainAxisSize.min</code></p>
+</li>
+<li><p>Inseriamo un nuovo <code>ElevatedButton.icon</code> questo bottone predefinito di flutter richiede che tra i parametri sia passata un'icona(<code>IconData</code>) che come già sappiamo è anch'essa un widget</p>
+</li>
+<li><p>Creiamo un po' di spazio tra i due bottoni con il Widget <code>SizedBox(width: 10)</code> inserendolo tra i due bottoni (figli di Row)</p>
+</li>
+<li><p>nel parametro <code>onPressed:</code> del nuovo bottone inseriamo il metodo <code>appState.toggleFavorite();</code> che abbiamo creato precedentemente nello state dell'app.</p>
+</li>
+<li><p>Creiamo una variabile <code>IconData icon</code> e assegnamo un'icona differente in base al fatto che la parola generata sia all'interno o meno della lista, controllando appunto con una condizione se <code>if(appState.favorites.contains(pair))</code>. 
+Se la parola è contenuta istanziamo un Widget Icona con simbolo di un cuore pieno, altrimenti istanziamo un Widget Icona con simbolo di un cuore vuoto.</p>
+</li>
+</ul>
+<pre><code class="fenced-code-block language-dart"><span class="token keyword">class</span> <span class="token class-name">MyHomePage</span> <span class="token keyword">extends</span> <span class="token class-name">StatelessWidget</span> <span class="token punctuation">{</span>
+  <span class="token metadata function">@override</span>
+  <span class="token class-name">Widget</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token class-name">BuildContext</span> context<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// Avere widget separati per parti logiche separate della tua interfaccia</span>
+    <span class="token comment">// utente è un modo importante per gestire la complessità in Flutter.</span>
+    <span class="token class-name">MyAppState</span> appState <span class="token operator">=</span> context<span class="token punctuation">.</span>watch<span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">MyAppState</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// dichiaro qui sopra l'oggetto che mi serve senza portare dietro per tutto </span>
+    <span class="token comment">// il widget l'intero appState</span>
+    <span class="token class-name">WordPair</span> pair <span class="token operator">=</span> appState<span class="token punctuation">.</span>current<span class="token punctuation">;</span> 
+
+
+    <span class="token class-name">IconData</span> icon<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>appState<span class="token punctuation">.</span>favorites<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>pair<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      icon <span class="token operator">=</span> <span class="token class-name">Icons</span><span class="token punctuation">.</span>favorite<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      icon <span class="token operator">=</span> <span class="token class-name">Icons</span><span class="token punctuation">.</span>favorite_border<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> <span class="token class-name">Scaffold</span><span class="token punctuation">(</span>
+      body<span class="token punctuation">:</span> <span class="token class-name">Center</span><span class="token punctuation">(</span>
+        child<span class="token punctuation">:</span> <span class="token class-name">Column</span><span class="token punctuation">(</span>
+          mainAxisAlignment<span class="token punctuation">:</span> <span class="token class-name">MainAxisAlignment</span><span class="token punctuation">.</span>center<span class="token punctuation">,</span>
+          children<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+            <span class="token class-name">BigCard</span><span class="token punctuation">(</span>pair<span class="token punctuation">:</span> pair<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token class-name">SizedBox</span><span class="token punctuation">(</span>height<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token class-name">Row</span><span class="token punctuation">(</span>
+              mainAxisSize<span class="token punctuation">:</span> <span class="token class-name">MainAxisSize</span><span class="token punctuation">.</span>min<span class="token punctuation">,</span>
+              children<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+                <span class="token class-name">ElevatedButton</span><span class="token punctuation">.</span><span class="token function">icon</span><span class="token punctuation">(</span>
+                  onPressed<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    appState<span class="token punctuation">.</span><span class="token function">toggleFavorite</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                  icon<span class="token punctuation">:</span> <span class="token class-name">Icon</span><span class="token punctuation">(</span>icon<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                  label<span class="token punctuation">:</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">'Like'</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token class-name">SizedBox</span><span class="token punctuation">(</span>width<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token class-name">ElevatedButton</span><span class="token punctuation">(</span>
+                  onPressed<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    appState<span class="token punctuation">.</span><span class="token function">getNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                  child<span class="token punctuation">:</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">'Next'</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token punctuation">)</span><span class="token punctuation">,</span>
+              <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Quindi a questo punto possiamo aggiungere le nostre parole preferite all'interno di una lista.</p>
+<p>parlare del code organization del progetto flutter <a href="https://medium.com/@patthipati/code-organization-with-provider-state-management-for-flutter-ae2a77b63718">code organization source</a></p>
 </article>
 </body>
 </html>
