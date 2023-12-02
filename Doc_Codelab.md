@@ -149,7 +149,7 @@ Ora sovrascriveremo il contenuto di 3 file con del codice di partenza per l'app.
 Iniziamo sostituendo il contenuto del file pubspec.yaml con il codice sotto:  
 ![desc](https://codelabs.developers.google.com/static/codelabs/flutter-codelab-first/img/ac32a9e0158125e3_856.png)
 
-```
+```yaml
 name: namer_app
 description: A new Flutter project.
 
@@ -188,7 +188,7 @@ Successivamente, apriamo l'altro file di configurazione nel progetto, `analysis_
 
 E sostituiamo il contenuto del file con questo.
 
-```
+```yaml
 include: package:flutter_lints/flutter.yaml
 
 linter:
@@ -212,7 +212,7 @@ Adesso apriamo il file `main.dart` nella cartella `lib`
 
 E anche qui sostituiamo il contenuto di questo file con il codice seguente e salviamo il file
 
-```
+```dart
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -271,7 +271,7 @@ Queste 50 righe di codice rappresentano l'intera app di partenza.
 
 Avviamo nuovamente l'applicazione tramite l'icona in alto a destra o premiamo F5 per avviare l'app e aspettiamo qualche secondo prima che si avvi. Per testare questa funzionalità famosa di Flutter, ovvero l'**hot reload** modifichiamo il parametro dell'oggetto Text() in una nuova stringa
 
-```
+```dart
 // ...
 
     return Scaffold(
@@ -292,7 +292,7 @@ dopo aver modificato la stringa nell'oggetto del primo `Text()` se salverete il 
 
 Sempre nel main aggiungiamo il bottone nella parte inferiore del Widget Column(il widget che incolonna una lista di Widget).
 
-```
+```dart
 // ...
 
     return Scaffold(
@@ -322,7 +322,7 @@ Salvando la modifica, l'app si aggiorna nuovamente: viene visualizzato un pulsan
 
 Per quanto questo sia un piccolo corso accelerato di Flutter è importante dare un'occhiata al codice
 
-```
+```dart
 // ...
 
 void main() {
@@ -334,7 +334,7 @@ void main() {
 
 Nella parte superiore del file troveremo la funzione `main()`. Che dice a Flutter solo di eseguire l'app definita in `MyApp` che è un Widget.
 
-```
+```dart
 // ...
 
 class MyApp extends StatelessWidget {
@@ -367,7 +367,7 @@ Il codice `MyApp`configura l'intera app ed è abbastanza standard. Qui dentro so
 
 Lo stato dell'app(business logic) è contenuto in: 
 
-```
+```dart
 // Classe che rappresenta lo stato dell'app(Dati) 
 class MyAppState extends ChangeNotifier {
   // questo metodo restituisce la stringa della coppia di parole
@@ -389,7 +389,7 @@ Noi useremo`ChangeNotifier` che è uno dei più facili da spiegare
 
 ## Widget Homepage
 
-```
+```dart
 // ...
 
 class MyHomePage extends StatelessWidget {
@@ -432,7 +432,7 @@ Abbiamo `MyHomePage`che è il widget che abbiamo creato e che abbiamo scelto com
 Adesso, collegheremo il pulsante allo stato dell'app, facendone cambiare i valori dello stato e ridisegnando i Widget che osservano lo stato dell'app.
 Torniamo nella sezione di codice che rappresenta lo stato dell'app ovvero all'interno di `MyAppState` e aggiungiamo questa porzione di codice
 
-```
+```dart
 // ...
 
 class MyAppState extends ChangeNotifier {
@@ -455,7 +455,7 @@ Subito dopo verrà ridisegnata l'app a partire dal Widget radice, scendendo fino
 Tornando al nostro bottone quello che facciamo adesso in questo piccolo pezzo di codice sarà chiamare il metodo `getNext` dal parametro di tipo callback del pulsante .
 In Flutter, il parametro `onPressed` nei widget dei bottoni è utilizzato per specificare la funzione o il blocco di codice che deve essere eseguito quando il pulsante viene premuto (cliccato).
 
-```
+```dart
 // ...
 
     ElevatedButton(
