@@ -741,10 +741,59 @@ Quindi a questo punto possiamo aggiungere le nostre parole preferite all'interno
 
 
 
+## NavigationBar
+
+Sappiamo che un'app non può contenere tutto in un unica schermata. Quindi abbiamo bisogno di un widget che ci permetta di visualizzare e navigare all'interno dell'app. Uno dei modi possibili può essere utilizzare il widget **`Navigationbar()`**. 
+
+Quindi creaiamo un widget che andrà a gestire la navigazione tra le pagine principali della nostra app e lo chiamiamo `Navigation`. Questo sarà uno `StatefulWidget`.
 
 
 
+Man mano che l'app diventa più grande e bisogna tenere traccia degli stati dei singoli widget, non sarà una buona pratica tenere traccia degli stati di tutti i widget in un unico app state in questo caso `MyAppState`, questo perchè non è necessario che gli altri widget possano accedere agli stati degli altri widget. 
+Ad esempio agli altri widget non interessa sapere l'index  della pagina visualizzata usato nella Navigationbar. Quindi gli stati di alcuni widget non sono utili ad altri widget.
+
+#### Utilizzo Stateful widget
+
+- Gli `StatefulWidget` sono widget che contengono il loro stato all'interno dello stesso widget(ad esempio l'index della pagina da visualizzare) e sono in grado di cambiare uno stato di se stessi per poi ricostruirsi(chiamata al metodo build) sulla base del loro stato.
+
+- Quindi gli `StatefulWidget` contengono uno stato che è solo loro, non viene condiviso con nessun altro. Loro gestiscono il loro stato, e quando il loro stato cambia, si ricostruiscono(chiamata al metodo build). 
+
+- Nel nostro caso lo `StatefulWidget` `Navigation` che abbiamo creato, contiene lo stato della sua navigation bar(l'index), e ogni volta che l'index della **`Navigationbar()`** cambierà, allora ricostruirà la sua visualizzazione.
+  
+
+- Nel caso del nostro `Navigation` widget, il suo stato `currentPageIndex`, quando verrà cambiato con l'evento `onDestinationSelected` andrà a chiamare la ricostruzione del widget `Navigation` in questo modo:
+  
+  
+  ```dart
+  //...
+  
+  onDestinationSelected: (int index) {
+      
+      // in setState va cambiato lo stato del widget(currentPageIndex)
+      // setState andrà a ridisegnare l'intero widget
+      setState(() {
+          currentPageIndex = index;
+      });
+  },
+  
+  //...
+  ```
 
 
 
-parlare del code organization del progetto flutter [code organization source](https://medium.com/@patthipati/code-organization-with-provider-state-management-for-flutter-ae2a77b63718)
+#### Organizzazione del codice
+
+Quando il progetto cresce è necesario organizzare il codice. Ho organizzato il codice per voi, ho utilizzato questa fonte: [code organization](https://medium.com/@patthipati/code-organization-with-provider-state-management-for-flutter-ae2a77b63718), per chi ha voglia di approfondire come organizzare un progetto in Flutter.
+
+
+
+#### Rimozione delle favorite word
+
+Ho inserito il tasto Remove in ogni elemento della lista preferiti `FavoriteTile` chiedendo di rimuovere dallo stato dell'app la parola da rimuovere, vedere `appState.removeFavorite(pair);`. Possiamo aggiungere e rimuovere parole. I widget in ascolto sullo stato `MyAppState` si ricostruirando con coerenza per tutta l'app in modo coerente e consistente. 
+
+
+Esempio in javascript-html, svantaggio del dover elencare tutti i componenti html che devono visualizzare un determinato dato.  
+
+## Fine codelab
+
+Questo sarà il progetto di partenza per il prossimo codelab in cui implementeremo l'autenticazione tramite servizi cloud Firebase. Utilizzeremo il database del servizio Firebase per memorizzare delle strutture dati sul database e useremo dei metodi per ottenere i dati dal database.

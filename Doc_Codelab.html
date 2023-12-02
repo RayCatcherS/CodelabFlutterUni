@@ -1855,7 +1855,42 @@ Se la parola è contenuta istanziamo un Widget Icona con simbolo di un cuore pie
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <p>Quindi a questo punto possiamo aggiungere le nostre parole preferite all'interno di una lista.</p>
-<p>parlare del code organization del progetto flutter <a href="https://medium.com/@patthipati/code-organization-with-provider-state-management-for-flutter-ae2a77b63718">code organization source</a></p>
+<h2 class="atx" id="navigationbar">NavigationBar</h2>
+<p>Sappiamo che un'app non può contenere tutto in un unica schermata. Quindi abbiamo bisogno di un widget che ci permetta di visualizzare e navigare all'interno dell'app. Uno dei modi possibili può essere utilizzare il widget <strong><code>Navigationbar()</code></strong>. </p>
+<p>Quindi creaiamo un widget che andrà a gestire la navigazione tra le pagine principali della nostra app e lo chiamiamo <code>Navigation</code>. Questo sarà uno <code>StatefulWidget</code>.</p>
+<p>Man mano che l'app diventa più grande e bisogna tenere traccia degli stati dei singoli widget, non sarà una buona pratica tenere traccia degli stati di tutti i widget in un unico app state in questo caso <code>MyAppState</code>, questo perchè non è necessario che gli altri widget possano accedere agli stati degli altri widget. 
+Ad esempio agli altri widget non interessa sapere l'index  della pagina visualizzata usato nella Navigationbar. Quindi gli stati di alcuni widget non sono utili ad altri widget.</p>
+<h4 class="atx" id="utilizzo-stateful-widget">Utilizzo Stateful widget</h4>
+<ul>
+<li><p>Gli <code>StatefulWidget</code> sono widget che contengono il loro stato all'interno dello stesso widget(ad esempio l'index della pagina da visualizzare) e sono in grado di cambiare uno stato di se stessi per poi ricostruirsi(chiamata al metodo build) sulla base del loro stato.</p>
+</li>
+<li><p>Quindi gli <code>StatefulWidget</code> contengono uno stato che è solo loro, non viene condiviso con nessun altro. Loro gestiscono il loro stato, e quando il loro stato cambia, si ricostruiscono(chiamata al metodo build). </p>
+</li>
+<li><p>Nel nostro caso lo <code>StatefulWidget</code> <code>Navigation</code> che abbiamo creato, contiene lo stato della sua navigation bar(l'index), e ogni volta che l'index della <strong><code>Navigationbar()</code></strong> cambierà, allora ricostruirà la sua visualizzazione.</p>
+</li>
+</ul>
+<ul>
+<li>Nel caso del nostro <code>Navigation</code> widget, il suo stato <code>currentPageIndex</code>, quando verrà cambiato con l'evento <code>onDestinationSelected</code> andrà a chiamare la ricostruzione del widget <code>Navigation</code> in questo modo:</li>
+</ul>
+<pre><code class="fenced-code-block language-dart"><span class="token comment">//...</span>
+
+onDestinationSelected<span class="token punctuation">:</span> <span class="token punctuation">(</span>int index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// in setState va cambiato lo stato del widget(currentPageIndex)</span>
+    <span class="token comment">// setState andrà a ridisegnare l'intero widget</span>
+    <span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        currentPageIndex <span class="token operator">=</span> index<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+<span class="token comment">//...</span></code></pre>
+<h4 class="atx" id="organizzazione-del-codice">Organizzazione del codice</h4>
+<p>Quando il progetto cresce è necesario organizzare il codice. Ho organizzato il codice per voi, ho utilizzato questa fonte: <a href="https://medium.com/@patthipati/code-organization-with-provider-state-management-for-flutter-ae2a77b63718">code organization</a>, per chi ha voglia di approfondire come organizzare un progetto in Flutter.</p>
+<h4 class="atx" id="rimozione-delle-favorite-word">Rimozione delle favorite word</h4>
+<p>Ho inserito il tasto Remove in ogni elemento della lista preferiti <code>FavoriteTile</code> chiedendo di rimuovere dallo stato dell'app la parola da rimuovere, vedere <code>appState.removeFavorite(pair);</code>. Possiamo aggiungere e rimuovere parole. I widget in ascolto sullo stato <code>MyAppState</code> si ricostruirando con coerenza per tutta l'app in modo coerente e consistente. </p>
+<p>Esempio in javascript-html, svantaggio del dover elencare tutti i componenti html che devono visualizzare un determinato dato.  </p>
+<h2 class="atx" id="fine-codelab">Fine codelab</h2>
+<p>Questo sarà il progetto di partenza per il prossimo codelab in cui implementeremo l'autenticazione tramite servizi cloud Firebase. Utilizzeremo il database del servizio Firebase per memorizzare delle strutture dati sul database e useremo dei metodi per ottenere i dati dal database.</p>
 </article>
 </body>
 </html>
