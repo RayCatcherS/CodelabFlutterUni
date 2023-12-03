@@ -64,7 +64,7 @@ Per eseguire i comandi Flutter attraverso la console di Windows sarà necessario
 
 >  C:\SDKs\flutter\bin
 
-![]([C:\Users\roman\Documents\GitHub\CodelabFlutterUni\media\steps\flutter_path.png](https://raw.githubusercontent.com/RayCatcherS/CodelabFlutterUni/main/media/steps/flutter_path.png))
+![](https://raw.githubusercontent.com/RayCatcherS/CodelabFlutterUni/main/media/steps/flutter_path.png)
 Per verificare che tutto funzioni, chiudere tutte i terminali Windows eventualmente aperti, aprire un Terminale ed eseguire il comando:
 
 > flutter doctor
