@@ -783,7 +783,7 @@ Ho inserito il tasto Remove in ogni elemento della lista preferiti `FavoriteTile
 
 Esempio in javascript-html, svantaggio del dover elencare tutti i componenti html che devono visualizzare un determinato dato.  
 
-## Fine codelab
+## Fine primo codelab
 
 Questo sarà il progetto di partenza per il prossimo codelab in cui implementeremo l'autenticazione tramite servizi cloud Firebase. Utilizzeremo il database del servizio Firebase per memorizzare delle strutture dati sul database e useremo dei metodi per ottenere i dati dal database.
 Il codice di partenza e il secondo codelab a questo [link](https://github.com/RayCatcherS/Codelab2FlutterCasoStudioIUMUni) 
