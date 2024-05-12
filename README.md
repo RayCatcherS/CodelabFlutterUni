@@ -1,5 +1,5 @@
 # Codelab
-Codelab realizzato per il seminario su Flutter che ho tenuto per il corso di Interazione Uomo Macchina della Professoressa De Carolis Berardina
+Codelab realizzato per il seminario su Flutter tenuto per il corso di Interazione Uomo Macchina della Professoressa De Carolis Berardina
 
 # Link Download Doc Codelab
 ![enter image description here](https://raw.githubusercontent.com/RayCatcherS/CodelabFlutterUni/main/media/repository_codelab1.png)
